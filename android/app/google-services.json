@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "134741506107",
+    "firebase_url": "https://schoolapp-caec0.firebaseio.com",
+    "project_id": "schoolapp-caec0",
+    "storage_bucket": "schoolapp-caec0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134741506107:android:159a60fc6d7638fd73c41e",
+        "android_client_info": {
+          "package_name": "com.example.schools_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134741506107-to0e1bsajba21mkfubrj6uv6504puq62.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.schools_management",
+            "certificate_hash": "177d6058e1d2be7bc2440a7241ffc0cffdb9a88e"
+          }
+        },
+        {
+          "client_id": "134741506107-pvtlj08oo2mb2jo4nomfaoj2vcr73cgj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTbgikC8ff70FhIN_725_Y2_rT2JVwLhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134741506107-pvtlj08oo2mb2jo4nomfaoj2vcr73cgj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

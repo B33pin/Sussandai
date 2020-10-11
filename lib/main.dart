@@ -1,31 +1,36 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:schools_management/provider/parent.dart';
 import 'package:schools_management/provider/student.dart';
 import 'package:schools_management/provider/teacher.dart';
 import 'package:schools_management/screens/login_page.dart';
+import 'package:schools_management/screens/parent/demoparentpage.dart';
 import 'package:schools_management/screens/parent/main_parent_page.dart';
+import 'package:schools_management/screens/teacher/Demoteacherpage.dart';
 import 'package:schools_management/screens/teacher/main_teacher_page.dart';
 
-
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider( // The providers that we are gonna use at the app
+    return MultiProvider(
+      // The providers that we are gonna use at the app
       providers: [
         ChangeNotifierProvider(
-          create: (context) => Parent(),   // parentProvier
+          create: (context) => Parent(), // parentProvier
         ),
-
-           ChangeNotifierProvider(
-          create: (context) => Student(),  // studentparentProvier
+        ChangeNotifierProvider(
+          create: (context) => Student(), // studentparentProvier
         ),
-
-              ChangeNotifierProvider(
-          create: (context) => Teacher(),  // teacherProvier
+        ChangeNotifierProvider(
+          create: (context) => Teacher(), // teacherProvier
         ),
       ],
       child: MaterialApp(
@@ -36,10 +41,10 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.transparent,
         ),
         home: Login(), // homepage
-        routes: { // route names to mainParentPage and mainTeacherPage
-          MainParentPage.routeName: (ctx) => MainParentPage(),
-          MainTeacherPage.routeName: (ctx) => MainTeacherPage(),
-  
+        routes: {
+          // route names to mainParentPage and mainTeacherPage
+          MainParentPage.routeName: (ctx) => DemoParentPage(),
+          MainTeacherPage.routeName: (ctx) => DemoTeacherPage(),
         },
       ),
     );

@@ -15,14 +15,14 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // the key for the form
-  TextEditingController user = new TextEditingController(); // the controller for the usename that user will put in the text field
-  TextEditingController pass = new TextEditingController(); // the controller for the password that user will put in the text field
+  final GlobalKey<FormState> _formKey =
+      GlobalKey<FormState>(); // the key for the form
+  TextEditingController user =
+      new TextEditingController(); // the controller for the usename that user will put in the text field
+  TextEditingController pass =
+      new TextEditingController(); // the controller for the password that user will put in the text field
 
   int selectedRadio = 1; // variable for radiobutton
-
-
-
 
 // control the radiobutton using this function
   setSelectedRadio(int val) {
@@ -63,68 +63,69 @@ class _LoginState extends State<Login> {
                 height: 100,
                 width: 100,
                 child: Center(
-              child: CircularProgressIndicator(
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
-              ),
-            )),
+                  child: CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                  ),
+                )),
           );
         });
   }
 
   // login function
-   _login() async {
-    
-      if (_formKey.currentState.validate()) { // check if all the conditionsthe we put on validators are right
+  _login() async {
+    if (_formKey.currentState.validate()) {
+      // check if all the conditionsthe we put on validators are right
 
-         showLoadingProgress(); // show CircularProgressIndicator
+      showLoadingProgress(); // show CircularProgressIndicator
 
-       
-        if (selectedRadio == 1) { // if the radio button on parent then login using parent provider
+      if (selectedRadio == 1) {
+        // if the radio button on parent then login using parent provider
 
-        Provider.of<Parent>(context).loginParentAndGetInf(user.text, pass.text).then((state){ // pass username and password that user entered 
+        Provider.of<Parent>(context)
+            .loginParentAndGetInf(user.text, pass.text)
+            .then((state) {
+          // pass username and password that user entered
+          print(user.text);
+          print(pass.text);
 
-        
-        if(state){ // if the function returned true 
-         
-          Navigator.of(context).pushNamed(MainParentPage.routeName); // go to the Main page for parent
-        }else{
-          showAlert('Error', 'You Entered Wrong username or password'); // otherwise show an Alert
-        }
+          if (state) {
+            // if the function returned true
 
+            Navigator.of(context).pushNamed(
+                MainParentPage.routeName); // go to the Main page for parent
+          } else {
+            showAlert('Error',
+                'You Entered Wrong username or password'); // otherwise show an Alert
+          }
         });
+      } else if (selectedRadio == 2) {
+        // if the radio button on teacher then login using teacher provider
 
-       
-         
-        } else if (selectedRadio == 2) { // if the radio button on teacher then login using teacher provider
+        Provider.of<Teacher>(context)
+            .loginTeacherAndGetInf(user.text, pass.text)
+            .then((state) {
+          // pass username and password that user entered
+          print(user.text);
+          print(pass.text);
 
-             Provider.of<Teacher>(context).loginTeacherAndGetInf(user.text, pass.text).then((state){ // pass username and password that user entered 
+          if (state) {
+            // if the function returned true
 
-        
-        if(state){ // if the function returned true 
-         
-          Navigator.of(context).pushNamed(MainTeacherPage.routeName); // go to the Main page for teacher
-        }else{
-          showAlert('Error', 'You Entered Wrong username or password'); // otherwise show an Alert
-        }
-
+            Navigator.of(context).pushNamed(
+                MainTeacherPage.routeName); // go to the Main page for teacher
+          } else {
+            showAlert('Error',
+                'You Entered Wrong username or password'); // otherwise show an Alert
+          }
         });
-
-        }
-
-    
       }
     }
-  
-
- 
-    
- 
-  
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  Container(
+      body: Container(
         width: double.infinity,
         // decoration: BoxDecoration(
         //     gradient: LinearGradient(begin: Alignment.topCenter, colors: [
@@ -221,7 +222,8 @@ class _LoginState extends State<Login> {
                                                 TextStyle(color: Colors.grey),
                                             border: InputBorder.none),
                                         keyboardType: TextInputType.text,
-                                        validator: (value) { //check if the username is not less than two characters
+                                        validator: (value) {
+                                          //check if the username is not less than two characters
                                           if (value.length < 2) {
                                             return '$value length not long enough';
                                           } else {
@@ -310,9 +312,9 @@ class _LoginState extends State<Login> {
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    onPressed: () { // when we press this button excute login function
+                                    onPressed: () {
+                                      // when we press this button excute login function
                                       _login();
-                                     
                                     }),
                               ),
                             )),

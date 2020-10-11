@@ -1,6 +1,7 @@
 /**the provider for teacher */
 
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -45,28 +46,26 @@ class Teacher with ChangeNotifier{
   //we will use this function to login and get parent infromation by passing the username and password to it
   // we use it Future Boolean <so when we use it we check if the user logged properly return true other wise return false>
    Future<bool> loginTeacherAndGetInf(String user,String pass) async{
-    var response;
-    var datauser;
-    try{
-        response = await http.post(
-              "http://10.0.2.2/institutions/for_app/login_teachers.php",
-              body: {
-                "username": user.trim(), // we use trim method to avoid spaces that user may make when logging 
-                "password": pass.trim(), // we use trim method to avoid spaces that user may make when logging 
-              });
-    if(response.statusCode == 200){ // if every things are right decode the response and insertInf then return true
-    datauser = await json.decode(response.body);
-    insertInf(datauser);
-    return true;
-    }
-    print(datauser);
+     FirebaseFirestore firestore = FirebaseFirestore.instance;
+    try {
+     QuerySnapshot docs = await firestore.collection('Teacher').get();
+      if(docs.size>0){
+      final users = docs.docs;
+      bool count = false;
+      for(int i = 0; i<docs.size;i++){
+        if((users[i].data()['email']==user) &&(users[i].data()['password']==pass)){
+          count = true;
+        }
+      } if (count == true){
+        return true;
+      } else {
+        return false;
+      }
+      }
     }catch(e){
       print(e); // else print the error then return false
       
     }
-
-   return false;
-    
   }
 
 // i just used this function to make the code more organised and not so messed
